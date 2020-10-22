@@ -1,35 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: NavigationBar(title: 'Flutter Demo Home Page'),
-    );
-  }
+void main() {
+  runApp(ButtonNavigationBar());
 }
 
-class NavigationBar extends StatefulWidget {
-  NavigationBar({Key key, this.title}) : super(key: key);
-  final String title;
+class ButtonNavigationBar extends StatefulWidget {
   @override
-  _NavigationBarState createState() => _NavigationBarState();
+  _ButtonNavigationBarState createState() => _ButtonNavigationBarState();
 }
 
-class _NavigationBarState extends State<NavigationBar> {
-  // This navigator state will be used to navigate different pages
+class _ButtonNavigationBarState extends State<ButtonNavigationBar> {
+  @override
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   int _currentTabIndex = 0;
-  @override
+
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("prueba"),
+        ),
         body: Navigator(key: _navigatorKey, onGenerateRoute: generateRoute),
         bottomNavigationBar: _bottomNavigationBar(),
       ),
@@ -77,16 +67,20 @@ class _NavigationBarState extends State<NavigationBar> {
     switch (settings.name) {
       case "Account":
         return MaterialPageRoute(
-            builder: (context) => Container(
-                color: Colors.blue, child: Center(child: Text("Account"))));
+            builder: (context) =>
+                Container(
+                    color: Colors.blue, child: Center(child: Text("Account"))));
       case "Settings":
         return MaterialPageRoute(
-            builder: (context) => Container(
-                color: Colors.green, child: Center(child: Text("Settings"))));
+            builder: (context) =>
+                Container(
+                    color: Colors.green,
+                    child: Center(child: Text("Settings"))));
       default:
         return MaterialPageRoute(
-            builder: (context) => Container(
-                color: Colors.white, child: Center(child: Text("Home"))));
+            builder: (context) =>
+                Container(
+                    color: Colors.white, child: Center(child: Text("Home"))));
     }
   }
 }
